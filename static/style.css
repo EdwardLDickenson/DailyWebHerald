@@ -1,0 +1,79 @@
+body, html{
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: white;
+}
+
+a, a:visited{
+    text-decoration: none;
+    color: green;
+}
+
+textarea{
+    width: 64ch;
+    height: 32ch;
+    overflow: scroll;
+}
+
+div.top{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid white;
+    margin-bottom: 1%;
+}
+
+div.top > nav > div.navbar{
+    display: inline;
+}
+
+div.navbar > ul > li{
+    text-align: center;
+    display: inline;
+}
+
+div.left{
+    width: 20%;
+    float: left;
+}
+
+div.left > form > input{
+    padding-left: 0;
+    margin-left: 0;
+}
+
+div.center{
+    width: 60%;
+    float: left;
+}
+
+ul.indexPages > li{
+    display: inline;
+    list-style-type: none;
+}
+
+ul.headline{
+    list-style-type: none;
+}
+
+ul.headline > li{
+    list-style-type: none;
+}
+
+div.right{
+    width: 20%;
+    float: right;
+}
+
+div.bottom{
+    clear:both;
+    text-align: center;
+    padding-bottom: 2%;
+    padding-top: 2%;
+    border-top: 1px solid white;
+}
+
+span.articleMeta{
+    font-size: 80%;
+}
