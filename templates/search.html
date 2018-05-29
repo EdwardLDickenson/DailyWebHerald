@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block center %}
+
+    <form class="advancedSearch" action="/search" method="POST">
+        {% if searchf %}<table><tr><td><label for="searchStr">String to search</label></td><td>{{searchf.searchStr}}</td></tr>
+            <tr><td><label for="startDate">Start Date</label></td><td>{{searchf.startDate}}</td>
+            <td><label for="endDate">End Date</label></td><td>{{searchf.endDate}}</td></tr>
+            <tr><td><label for="publisheDate">Published On</label></td><td>{{searchf.publishDate}}</td></tr>
+            <tr><td><label for="minViews">Min Views</label></td><td>{{searchf.minViews}}</td>
+            <td><label for="maxViews">Max Views</label></td><td>{{searchf.maxViews}}</td></tr>
+            <tr><td><label for="views">View Count</label></td><td>{{searchf.views}}</td></tr>
+            <tr><td><label for="startDate">Publisher</label></td><td>{{searchf.publisher}}</td></tr>
+            <tr><td><label for="startDate">Website</label></td><td>{{searchf.website}}</td></tr>
+            <tr><td><label for="startDate">Articlce Title</label></td><td>{{searchf.title}}</td></tr>
+        {% endif %}<tr><td><input type="submit" value="Search"></td></tr></table>
+    </form>
+
+{% endblock %}

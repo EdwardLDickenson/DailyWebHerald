@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+
+{% block center %}    
+    Do you want to logout?
+    
+    <form method="post" action="/logout">
+        <input type="submit" value="Logout"/>
+    </form>
+    
+{% endblock %}

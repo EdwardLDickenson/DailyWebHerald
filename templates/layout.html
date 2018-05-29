@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Daily Web Herald</title>
+        <link href="{{url_for('static', filename='style.css')}}" type="text/css" rel="stylesheet">
+        <script src="{{url_for('static', filename='main.js')}}"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        {% block head %}{% endblock %}
+    </head>
+
+    <body>
+        <div class="main" id="main">
+            <div class="top" id="main.top">
+                <h2>Daily Web Herald RSS Feed Reader</h2>
+                <nav id="main.top.nav">
+                    <div id="main.top.nav.navbar" class="navbar">
+                        <ul>
+                            <li><a href="/">Home</a> |</li>
+                            <li><a href="/about">About</a> |</li>
+                            <li><a href="/search">Search</a> |</li>
+                            {% if username %}<li><a href="/subscriptions">Subscriptions</a> |</li>{% endif %}
+                            {% if username %}<li><a href="/logout">Logout</a> |</li>{% else %}<li><a href="/login">Login</a> |</li>{% endif %}
+                            {% if not username %}<li><a href="/create">Create Account</a> |</li>{% endif %}
+                            {% if username %} <br>Logged in as: {{username}}{% endif %}
+                            {% block top %}{% endblock %}
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="left" id="main.left">
+                {% block left %}{% if searchf %}
+                <form action="/search" method="POST">
+                    {{searchf.searchStr}}
+                    <input type="submit" value="Search">
+                </form>{% endif %}{% endblock%}
+            </div>
+
+            <div class="center" id="main.center">
+                {% block center %}
+                {% endblock %}
+            </div>
+
+            <div class="right" id="main.right">
+                {% block right %}{% endblock %}
+            </div>
+
+            <div class="bottom" id="main.bottom">
+                <a href="/contact">Contact</a>{% block bottom %}{% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

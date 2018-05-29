@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block center %}
+    Create an account with us:
+    
+    {% if form %}
+    <form method="POST" action="">
+        <label for="username">Enter a username</label>
+        {{form.username}}<br>
+        <label for="email">Enter an email address</label>
+        {{form.email}}<br>
+        <label for="password">Enter a password(6 Character minimum)</label>
+        {{form.password}}<br>
+        <label for="confirm">Confirm the password</label>
+        {{form.confirm}}<br>
+        
+        <input type="submit" value="Create Account">
+    </form>
+    {% endif %}
+    
+    {% if conf %}
+        You created an account: {{conf}}
+    {% endif %}
+    
+{% endblock %}

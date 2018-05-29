@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block center %}
+    {% if username %}
+        You have logged in as: {{username}}
+    {% endif %}
+    
+    {% if failed %}
+        Failed attempt to log in as: {{failed}}.<br>
+        Bad username or password
+    {% endif %}
+    
+    {% if form %}
+        <form method="POST" action="/login">
+            <label for="username">Enter your username</label>
+            {{form.username}}<br>
+            <label for="password">Enter your password</label>
+            {{form.password}}
+            <input type="submit" value="Log in"/>
+        </form>
+    {% endif %}
+    
+{% endblock %}

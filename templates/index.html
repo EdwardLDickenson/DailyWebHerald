@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block center %}
+    <ul class="headline">
+        {% for i in articles%}<li><a href="article/{{i.id}}">{{i.title}}</a><br> <span class="articleMeta">{{i.site}} {{i.date}}</span></li><br>
+        {% endfor %}
+    </ul>
+
+    Pages:
+    <ul class="indexPages">
+        {% for i in pageList%}<li><a href="/{{i}}">{{i}}</a></li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

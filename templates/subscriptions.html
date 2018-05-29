@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block center %}
+
+    {% if newForm %}
+        <form method="POST" action="subscriptions">
+            <label for="url">Enter a URL to subscribe to an RSS feed</label>
+            {{newForm.url}}<br>
+            <input type="submit" value="Add website">
+        </form>
+    {% endif %}
+
+    <form method="POST" action="subscriptions">
+        <ol>{% for i in websites %}<li><input type="checkbox" name="sub" value="{{i}}"></input><label>{{i}}</label></li>
+            {% endfor %}
+        </ol>
+        <input type="submit" value="Unsubscribe"></input>
+    </form>
+
+    {% if subForm %}{{subForm.subscriptions}}
+    {% endif %}
+
+{% endblock %}
