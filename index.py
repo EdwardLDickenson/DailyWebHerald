@@ -16,7 +16,7 @@ def index():
     articles = getArticlesByUser(username=username, pageSize=pageSize)
     prepared = prepareArticleList(articles)
 
-    return render_template("index.html", username=getUsername(), articles=prepared, pageList=list(range(count)), searchf=searchForm(request.form))
+    return render_template("index.html", username=getUsername(), articles=prepared, pageList=list(range(count)))
 
 @app.route('/<int:page>')
 def pagedIndex(page):
@@ -34,36 +34,13 @@ def pagedIndex(page):
 
     return render_template("index.html", username=getUsername(), articles=prepared, pageList=list(range(count)))
 
-# def prepareArticleList(articles):
-#     cursor = mysql.connection.cursor()
-#     prepared = []
-#
-#     for i in range(len(articles)):
-#         article = {}
-#
-#         cursor.execute("SELECT websites.url FROM websites INNER JOIN articles ON websites.id = articles.site WHERE articles.id LIKE %s", [articles[i]["id"]])
-#         article["site"] = getCleanUrl(cursor.fetchall()[0]["url"])
-#         article["title"] = articles[i]["title"]
-#         article["date"] = articles[i]["date"]
-#         article["id"] = articles[i]["id"]
-#         article["summary"] = articles[i]["summary"]
-#         article["content"] = articles[i]["summary"]
-#
-#         if article["content"] != "":
-#             print(article["content"])
-#             article["content"] = articles[i]["content"]
-#
-#         prepared.append(article)
-#
-#     cursor.close()
-#     return prepared
 
-@app.errorhandler(404)
-def error404(e):
-    return render_template("404error.html"), 404
+#   TODO:
+#
+#   The NTSB RSS feed does not work for some reason. Possibly because of the use of special characters
+#
+#   Intermittent unsubscribe bug 
+#
+#
 
-@app.errorhandler(500)
-def error404(e):
-    return render_template("500error.html"), 500
 
-#   Add 405

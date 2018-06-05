@@ -5,7 +5,8 @@ class registerForm(Form):
     username = StringField("Name", [validators.Length(min=1, max=256)])
     password = PasswordField("Password", [validators.Length(min=6, max=64), validators.DataRequired(), validators.EqualTo("confirm", "Passwords must match")])
     confirm = PasswordField("Comfirm Password")
-    email = StringField("Email", [validators.Length(min=6, max=128), validators.Optional()])
+    email = StringField("Email", [validators.Length(min=6, max=128), validators.Optional(), validators.EqualTo("confirmEmail", "Emails must match(Or be omitted)")])
+    confirmEmail = StringField("confirmEmail", [validators.Length(min=6, max=128), validators.Optional()])
 
 class smallSearchForm(Form):
     searchStr = StringField("Str", [validators.Length(min=1, max=128)])

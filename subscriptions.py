@@ -19,9 +19,11 @@ def subscriptionsPage():
     unsubs = request.form.getlist("sub")
 
     for i in range(len(unsubs)):
-        cursor.execute("SELECT id FROM websites WHERE url LIKE %s", ["%" + unsubs[i] + "%"])
-        siteId = cursor.fetchone()["id"]
-        cursor.execute("DELETE FROM subscriptions WHERE user LIKE %s and site LIKE %s", [userId, siteId])
+        #cursor.execute("SELECT id FROM websites WHERE url LIKE %s", ["%" + unsubs[i] + "%"])
+        #siteId = cursor.fetchone()["id"]
+        #cursor.execute("DELETE FROM subscriptions WHERE user LIKE %s and site LIKE %s", [userId, siteId])
+        
+        
         mysql.connection.commit()
     
     if url != None:        

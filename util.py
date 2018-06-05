@@ -13,6 +13,10 @@ def loggedIn():
 
     return False
 
+def setSessionUsername(username):
+    session["username"] = username
+    print(username)
+
 def randomString(length):
     result = ""
 

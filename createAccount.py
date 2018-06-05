@@ -13,7 +13,6 @@ def createAccount():
         name = form.username.data
         email = form.email.data
         password = form.password.data
-        confirm = form.confirm.data
         salt = randomString(64)
         safePassword = crypt.crypt(password, "$6$" + salt  + "$")
         
@@ -23,12 +22,14 @@ def createAccount():
         if exists < 1:
             cursor.execute("INSERT INTO users(name, email, password, salt) VALUES(%s, %s, %s, %s)", (name, email, safePassword, salt))
             mysql.connection.commit()
+            setSessionUsername(name)
             
         else:
             cursor.close()
-            return 
+            error="Sorry, that username was taken"
+            return render_template("create.html", error=error)
             
         cursor.close()
-        return render_template("create.html", conf=name)
+        return render_template("create.html", success=name)
 
     return render_template("create.html", form=form)
