@@ -6,10 +6,12 @@
         {% endfor %}
     </ul>
 
-    Pages:
-    <ul class="indexPages">
-        {% for i in pageList%}<li><a href="/{{i}}">{{i}}</a></li>
-        {% endfor %}
-    </ul>
+    {% if pageList %}
+        <ul class="indexPages">
+            Pages:
+            {% for i in pageList%}<li><a href="/{{i}}">{{i}}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
 {% endblock %}

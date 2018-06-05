@@ -30,14 +30,17 @@
             </div>
 
             <div class="left" id="main.left">
-                {% block left %}{% if searchf %}
+                {% block left %}
                 <form action="/search" method="POST">
-                    {{searchf.searchStr}}
-                    <input type="submit" value="Search">
-                </form>{% endif %}{% endblock%}
+                    <table>
+                        <tr><td><input id="searchStr" name="searchStr" type="text" value=""></td><tr>
+                        <tr><td><input type="submit" value="Search"></td></tr>
+                    </table>
+                {% endblock %}
+                </form>
             </div>
 
-            <div class="center" id="main.center">
+            <div class="center" id="main.center"> 
                 {% block center %}
                 {% endblock %}
             </div>
@@ -47,7 +50,11 @@
             </div>
 
             <div class="bottom" id="main.bottom">
-                <a href="/contact">Contact</a>{% block bottom %}{% endblock %}
+                <ul>
+                    <li><a href="/contact">Contact</a> |</li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+                {% block bottom %}{% endblock %}
             </div>
         </div>
     </body>

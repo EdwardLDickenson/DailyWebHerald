@@ -1,23 +1,32 @@
 {% extends 'layout.html' %}
 
+{% block head %}
+    <script src="{{url_for('static', filename='login.js')}}"></script>
+{% endblock %}
+
 {% block center %}
-    {% if username %}
-        You have logged in as: {{username}}
+    <!--  This section should be removed with an appropriate reporting feature-->
+    {% if context.success %}
+        You have logged in as: {{context.username}}
     {% endif %}
-    
-    {% if failed %}
-        Failed attempt to log in as: {{failed}}.<br>
-        Bad username or password
+
+    <!--  Maybe it should be a div with the <p> tag -->
+    {% if context.failed %}
+        <p id="main.center.report">
+            Failed attempt to log in as: {{context.failed}}.<br>
+            <span id="main.center.report.reason">{{context.reason}}</span>
+        </p>
     {% endif %}
-    
-    {% if form %}
+
+    {% if context.form %}
         <form method="POST" action="/login">
-            <label for="username">Enter your username</label>
-            {{form.username}}<br>
-            <label for="password">Enter your password</label>
-            {{form.password}}
-            <input type="submit" value="Log in"/>
+            <table>
+                <tr><td><label for="username">Enter your username</label></td><td>{{context.form.username}}</td></tr>
+                <tr><td><label for="password">Enter your password</label></td><td>{{context.form.password}}</td></tr>
+                <tr><td><input type="submit" value="Log in"/></td></tr>
+            </table>
         </form>
+        <a href="/password">Forgot Password</a> | <a href="/username">Forgot Username</a>
     {% endif %}
-    
+
 {% endblock %}
