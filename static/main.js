@@ -5,10 +5,6 @@ subscripts = []
 function init()
 {
     console.log("Javascript file loaded correctly");
-    console.log(navigator.appName);
-    console.log(navigator.appVersion);
-    console.log(navigator.userAgent);
-    console.log(navigator.appCodeName);
 
     var appName = navigator.appName;
     var appVersion = navigator.appVersion;
@@ -29,16 +25,15 @@ function init()
         },
         success: function(result)
         {
-            console.log("Ajax!")
             return false;
         },
         failure: function()
         {
-            console.log("Not Ajax")
+            //console.log("Not Ajax")
         },
         error: function()
         {
-            console.log("Not Ajax!")
+            //console.log("Not Ajax!")
         }
     })
 
@@ -47,10 +42,8 @@ function init()
 
 function runSubscript()
 {
-    console.log("Run Subscripts")
     for(var i = 0; i < subscripts.length; ++i)
     {
-        console.log("Script found")
         subscripts[i]();
     }
 }
