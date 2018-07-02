@@ -14,16 +14,17 @@
     {% if context.failed %}
         <p id="main.center.report">
             Failed attempt to log in as: {{context.failed}}.<br>
-            <span id="main.center.report.reason">{{context.reason}}</span>
+            {{context.reason}}<br>
+            <span id="main.center.report.timestamp">{{context.timestamp}}</span>
         </p>
     {% endif %}
 
     {% if context.form %}
-        <form method="POST" action="/login">
+        <form method="POST" action="/login" id="main.center.login">
             <table>
-                <tr><td><label for="username">Enter your username</label></td><td>{{context.form.username}}</td></tr>
-                <tr><td><label for="password">Enter your password</label></td><td>{{context.form.password}}</td></tr>
-                <tr><td><input type="submit" value="Log in"/></td></tr>
+                <tr><td><label for="username" id="main.center.login.username">Enter your username</label></td><td>{{context.form.username}}</td></tr>
+                <tr><td><label for="password" id="main.center.login.password">Enter your password</label></td><td>{{context.form.password}}</td></tr>
+                <tr><td><input type="submit" value="Log in" id="main.center.login.submit"/></td></tr>
             </table>
         </form>
         <a href="/password">Forgot Password</a> | <a href="/username">Forgot Username</a>
