@@ -96,7 +96,7 @@ def getArticlesByUser(username, page=0, pageSize=10):
     articles = []
 
     #   This shold be rolled into another application
-    cursor.execute("SELECT url, id FROM websites WHERE NOW() - updateTime > 3600")
+    cursor.execute("SELECT url, id FROM websites WHERE NOW() - updateTime > 3600")  #SELECT * FROM websites WHERE TIMESTAMPDIFF(MINUTE, updateTime, CURRENT_TIMESTAMP) > 60
     websites = cursor.fetchall()
 
     for i in range(len(websites)):

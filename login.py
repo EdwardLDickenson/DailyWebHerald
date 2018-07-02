@@ -4,27 +4,31 @@ from forms import *
 
 def failedLoginsByTime(username, minutes=5, attempts=5, unit="MINUTE"):
     cursor = mysql.connection.cursor()
-    #   Unit should go into this query
-    cursor.execute("SELECT TIMESTAMPDIFF(MINUTE, time, CURRENT_TIMESTAMP) FROM loginAttempts INNER JOIN users ON users.id = loginAttempts.user WHERE users.name LIKE %s ORDER BY loginAttempts.id DESC LIMIT %s", [username, attempts])
+    #cursor.execute("SELECT TIMESTAMPDIFF(MINUTE, time, CURRENT_TIMESTAMP) FROM loginAttempts INNER JOIN users ON users.id = loginAttempts.user WHERE users.name LIKE %s ORDER BY loginAttempts.id DESC LIMIT %s", [username, attempts])
+    cursor.execute("SELECT COUNT(*) FROM loginAttempts INNER JOIN users ON users.id = loginAttempts.user WHERE users.name LIKE %s AND TIMESTAMPDIFF(MINUTE, time, CURRENT_TIMESTAMP) < %s", [username, attempts])
 
-    results = cursor.fetchall()
-    badAttemptCount = 0
+    results = cursor.fetchone()
+    #badAttemptCount = 0
 
-    for i in range(len(results)):
+    #for i in range(len(results)):
         #   Unit should go into this query
-        if results[i]["TIMESTAMPDIFF(MINUTE, time, CURRENT_TIMESTAMP)"] <= minutes:
-            badAttemptCount = badAttemptCount + 1
+    #    if results[i]["TIMESTAMPDIFF(" + unit + ", time, CURRENT_TIMESTAMP)"] <= minutes:
+    #        badAttemptCount = badAttemptCount + 1
+
+    badAttemptCount = results["COUNT(*)"]
 
     cursor.close()
     return badAttemptCount >= attempts
 
-def getLastTimestamp():
+def getLastTimestamp(username):
     cursor = mysql.connection.cursor()
 
-    cursor.execute("SELECT loginAttempts.id, time FROM loginAttempts INNER JOIN users ON users.id = loginAttempts.user ORDER BY time DESC LIMIT 1")
-
+    cursor.execute("SELECT time FROM loginAttempts INNER JOIN users ON users.id = loginAttempts.user WHERE users.name LIKE %s ORDER BY time DESC LIMIT 1", [username])
+    result = cursor.fetchone()
 
     cursor.close()
+
+    return result
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -46,8 +50,8 @@ def login():
             #   I'm not certain if comparing to an integer or
             if failedLoginsByTime(username):
                 context["failed"] = username
-                context["reason"] = "Too many login attempts"
-                context["timestamp"] = ""
+                context["reason"] = "Too many login attempts. Last attempt on: "
+                context["timestamp"] = str(getLastTimestamp(username))
 
             elif password == crypt.crypt(passwordAtt, "$6$" + salt  + "$"):
                 setSessionUsername(username)
@@ -66,6 +70,7 @@ def login():
     if "success" in context.keys() or loggedIn():
         return redirect("")
 
+    #print(context)
     return render_template("login.html", context=context)
 
 

@@ -154,7 +154,7 @@ ALTER TABLE pageRequests ROW_FORMAT=compact;
 SHOW WARNINGS;
 
 --  Set websites to UNIX epoch
---UPDATE websites SET updateTime = ("1970-1-1 00:00:00");
+--UPDATE websites SET updateTime = ("1970-1-1 00:00:01");
 
 --	Get URL of subscriptions
 --SELECT url FROM websites INNER JOIN subscriptions ON subscriptions.site = websites.id;

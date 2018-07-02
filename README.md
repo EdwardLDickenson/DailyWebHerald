@@ -1,2 +1,3 @@
-# DailyWebHerald
-Just a little web based RSS reader written in Python.
+# Readme #
+
+Dailywebherald, a small RSS reading written in Python using Flask.
